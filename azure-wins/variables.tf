@@ -8,3 +8,9 @@ variable "prefix" {
   default     = "win-vm-iis"
   description = "Prefix of the resource name"
 }
+
+variable "kv_secret_name" {
+  type = string
+  default = "wins-kv-pass"
+  description = "kv secret name"
+}

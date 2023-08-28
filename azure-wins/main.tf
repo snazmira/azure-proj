@@ -91,13 +91,13 @@ resource "azurerm_key_vault" "kv" {
   location                 = azurerm_resource_group.rg.location
   resource_group_name      = azurerm_resource_group.rg.name
   tenant_id = "649fdc15-3b6b-4851-807a-0e375634b34b"
-  sku_name = "2022-datacenter-azure-edition"
+  sku_name = "standard"
 }
 
 resource "azurerm_key_vault_secret" "kv-vm-secret" {
   key_vault_id = azurerm_key_vault.kv.id
-  name = var.kv_vm_secret_name
-  value = random_password.vm-password.result
+  name = var.kv_secret_name
+  value = random_password.password.result
   
 }
 
