@@ -92,6 +92,19 @@ resource "azurerm_key_vault" "kv" {
   resource_group_name      = azurerm_resource_group.rg.name
   tenant_id = "649fdc15-3b6b-4851-807a-0e375634b34b"
   sku_name = "standard"
+
+  access_policy {
+    tenant_id = "649fdc15-3b6b-4851-807a-0e375634b34b"
+    object_id = "c2f0bfeb-0e63-4e2c-8ebc-5cbe71698a34"
+    secret_permissions = [
+      "Set",
+      "Get",
+      "Delete",
+      "Purge",
+      "Recover",
+      "List"
+    ]
+  }
 }
 
 resource "azurerm_key_vault_secret" "kv-vm-secret" {
@@ -158,10 +171,6 @@ resource "random_id" "random_id" {
 
 resource "random_password" "password" {
   length      = 20
-  min_lower   = 1
-  min_upper   = 1
-  min_numeric = 1
-  min_special = 1
   special     = true
 }
 
