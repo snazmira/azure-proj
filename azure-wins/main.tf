@@ -86,12 +86,23 @@ resource "azurerm_storage_account" "my_storage_account" {
   account_replication_type = "LRS"
 }
 
+resource "azurerm_key_vault" "kv" {
+  name = "${random_pet.prefix.id}-kv"
+  resource_group_name      = azurerm_resource_group.rg.name
+}
+
+resource "azurerm_key_vault_secret" "kv-vm-secret" {
+  key_vault_id = azurerm_key_vault.kv.id
+  name = var.kv_vm_secret_name
+  value = random_password.vm-password.result
+  
+}
 
 # Create virtual machine
 resource "azurerm_windows_virtual_machine" "main" {
   name                  = "${var.prefix}-vm"
   admin_username        = "azureuser"
-  admin_password        = random_password.password.result
+  admin_password        = azurerm_key_vault_secret.kv-vm-secret.value
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.my_terraform_nic.id]
