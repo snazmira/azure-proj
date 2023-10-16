@@ -90,12 +90,12 @@ resource "azurerm_key_vault" "kv" {
   name = "${random_pet.prefix.id}-kv"
   location                 = azurerm_resource_group.rg.location
   resource_group_name      = azurerm_resource_group.rg.name
-  tenant_id = "649fdc15-3b6b-4851-807a-0e375634b34b"
+  tenant_id = "d84694ff-8b04-4a3c-a6c9-8789bfa51ed8"
   sku_name = "standard"
 
   access_policy {
-    tenant_id = "649fdc15-3b6b-4851-807a-0e375634b34b"
-    object_id = "c2f0bfeb-0e63-4e2c-8ebc-5cbe71698a34"
+    tenant_id = "d84694ff-8b04-4a3c-a6c9-8789bfa51ed8"
+    object_id = "985cb20f-e6b6-499c-91c6-f63215664c89"
     secret_permissions = [
       "Set",
       "Get",
